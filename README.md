@@ -3,8 +3,9 @@
 An initial Swift implementation of a habit app that measures return after an
 unlogged scheduled window, rather than maintaining a streak.
 
-**Status: source prototype.** The core uses real SwiftData persistence and has
-automated tests. The repository includes WatchConnectivity integration source
+**Status: source prototype.** The SwiftData core tests and local persistence
+simulation [passed in GitHub Actions](https://github.com/mirsvip/recovery-capture-prototype/actions/runs/44500219378).
+The repository includes WatchConnectivity integration source
 and Watch UI/complication examples. It does not yet contain a signed Xcode app,
 a TestFlight build, or a paired-device demonstration. There are no user-retention
 or battery-life measurements.
@@ -137,7 +138,7 @@ latency claim has been measured.
 
 ## Validation scope
 
-The local tests cover disk-store reopening, lost acknowledgements and replay,
+The XCTest suite covers disk-store reopening, lost acknowledgements and replay,
 conflicting UUID rejection, property-list serialization, invalid messages, and
 recovery calculations with unresolved gaps, pauses, duplicate events, and
 delayed arrival.
@@ -147,8 +148,8 @@ SwiftData model macro implementation. Full-package compilation and persistence
 tests cannot run locally with that setup. The iOS/watchOS conditional transport
 branch and example UI files also need their platform SDKs. The CI workflow is
 configured to run the full macOS core tests and simulation on Xcode-equipped
-runners; it does not validate those conditional branches. A configured workflow
-is not evidence of a successful run: consult the actual Actions result.
+runners; it does not validate those conditional branches. The initial code
+commit's full core tests and simulation passed in the Actions run linked above.
 
 The next device acceptance test is: capture offline, relaunch without loss,
 reconnect, verify exactly one event on iPhone, observe eventual arrival on Mac,

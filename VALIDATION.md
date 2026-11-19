@@ -28,11 +28,21 @@ so `@Model` expansion fails. The Command Line Tools installation also lacks
 XCTest. The disk-persistence and acknowledgement-replay XCTest cases are
 present in the repository but have not passed locally.
 
-## Automated and device validation
+## Passed in GitHub Actions
 
-`.github/workflows/swift.yml` configures full core tests and the persistence
-simulation on a macOS runner with Xcode. Its actual Actions result must be
-checked separately; adding the workflow does not establish that it passed.
+[Swift core run 44500219378](https://github.com/mirsvip/recovery-capture-prototype/actions/runs/44500219378)
+completed successfully for code commit `45d2dbb18bee021bec3bfa1b92fe2310a113be9a`.
+Both substantive steps succeeded on the Xcode-equipped macOS runner:
+
+- `swift test`: compile the full macOS package and run the XCTest suite,
+  including real SwiftData disk persistence and replay checks.
+- `swift run recovery-demo`: run the two-store persistence and acknowledgement
+  simulation successfully.
+
+The follow-up documentation commit records this evidence without changing the
+tested Swift source. These macOS results do not compile iOS/watchOS-only code.
+
+## Remaining device validation
 
 The iPhone/watchOS transport branch, example app views, complication routing,
 paired-device delivery, iCloud convergence, and battery cost remain unverified.
